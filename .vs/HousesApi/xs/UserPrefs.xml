@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{A82259DA-06BF-4A63-943D-EAAB38BF4951}|https" GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="HousesApi/Controllers/HousesController.cs">
+    <Files>
+      <File FileName="HousesApi/Startup.cs" />
+      <File FileName="HousesApi/Controllers/HousesController.cs" Line="12" Column="36" />
+      <File FileName="HousesApi/Models/House.cs" />
+      <File FileName="../../.microsoft/usersecrets/425fc992-1917-442a-9e62-95b10dfb9f60/secrets.json" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="HousesApi" expanded="True">
+            <Node name="HousesApi" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="HousesController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Properties" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.HousesApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
