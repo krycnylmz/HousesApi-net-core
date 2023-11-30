@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HousesApi.Models;
+using Microsoft.IdentityModel.Tokens;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HousesApi.Controllers
 {
@@ -45,23 +47,50 @@ namespace HousesApi.Controllers
 
         private string Generate(User user)
         {
-            var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(securityKey,
-                Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256);
+            Token token = new();
+            //Security Key'in simetriğini alıyoruz.
+            SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
+            //Şifrelenmiş kimliği oluşturuyoruz.
+            SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
+            //Oluşturulacak token ayarlarını veriyoruz.
+            token.Expiration = DateTime.UtcNow.AddHours(5);
+            JwtSecurityToken securityToken = new(
+             audience: _config["Jwt:Audience"],
+             issuer: _config["Jwt:Issuer"],
+             expires: token.Expiration,
+             notBefore: DateTime.UtcNow,
+             signingCredentials: signingCredentials,
+             claims: new List<Claim> { new(ClaimTypes.Name, user.username) }
+             );
 
-            var claims = new[]
+            JwtSecurityTokenHandler tokenHandler = new();
+            token.AccessToken = tokenHandler.WriteToken(securityToken);
+
+
+
+            // Will be deleted just for correcting the key
+            var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]!);
+            var tokenValidationParameters = new TokenValidationParameters
             {
-                    new Claim(ClaimTypes.NameIdentifier, user.username)
-                };
+                // EmitIssuerValidation: Yayın yapanın (issuer) doğrulanması gerekip gerekmediğini belirtir
+                ValidateIssuer = true,
+                ValidIssuer = _config["Jwt:Issuer"], // Geçerli yayın yapanın adı
+                                                              // EmitAudienceValidation: Hedef kitlenin (audience) doğrulanması gerekip gerekmediğini belirtir
+                ValidateAudience = true,
+                ValidAudience = _config["Jwt:Audience"], // Geçerli hedef kitlenin adı
+                                                                  // EmitLifetimeValidation: Tokenin zaman aşımını kontrol edip etmemeyi belirtir
+                ValidateLifetime = true,
+                // EmitIssuerSigningKeyValidation: İmza anahtarının doğrulanıp doğrulanmayacağını belirtir
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key) // İmza anahtarı
+            };
 
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-              _config["Jwt:Audience"],
-              claims,
-              expires: DateTime.Now.AddMinutes(15),
-              signingCredentials: credentials);
+            SecurityToken securityToken1;
+            var principal = tokenHandler.ValidateToken(token.AccessToken, tokenValidationParameters, out securityToken1);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return token.AccessToken;
+            
+
         }
 
         private User Authenticate(UserLoginDto userLogin)
