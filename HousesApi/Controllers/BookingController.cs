@@ -43,7 +43,6 @@ namespace HousesApi.Controllers
         [HttpPost]
         public async Task<IActionResult> PostBooking([FromBody] BookingDto bookingDto)
         {
-            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -51,7 +50,15 @@ namespace HousesApi.Controllers
 
             if (User.Identity != null && User.Identity.IsAuthenticated)
             {
-                // Burada AutoMapper gibi bir paket kullanıp hepisni tek seferde yapmak isterdim ancak zamanım yetmedi AutoMapper mekanizmasını çözmeye
+                // Gelen tarih aralığında rezervasyon kontrolü
+                bool isBookingAvailable = CheckBookingAvailability(bookingDto.house_id, bookingDto.check_in, bookingDto.check_out);
+
+                if (!isBookingAvailable)
+                {
+                    return BadRequest("Bu ev belirtilen tarihler arasında zaten rezerve edilmiş.");
+                }
+
+                // Rezervasyonu eklemek için devam edin
                 Booking booking = new Booking()
                 {
                     house_id = bookingDto.house_id,
@@ -60,7 +67,6 @@ namespace HousesApi.Controllers
                     check_in = bookingDto.check_in,
                     check_out = bookingDto.check_out,
                     created_at = DateTime.Now
-
                 };
 
                 _context.Bookings.Add(booking);
@@ -73,11 +79,17 @@ namespace HousesApi.Controllers
                 // Kullanıcı giriş yapmamış, hata yanıtı döndür
                 return Unauthorized("Giriş yapmadan rezervasyon yapamazsınız.");
             }
-
         }
 
+        private bool CheckBookingAvailability(long houseId, DateTime checkIn, DateTime checkOut)
+        {
+            // Belirtilen ev ve tarih aralığında rezervasyon yapılıp yapılmadığını kontrol et
+            bool isAvailable = !_context.Bookings.Any(b =>
+                b.house_id == houseId &&
+                ((checkIn >= b.check_in && checkIn < b.check_out) || (checkOut > b.check_in && checkOut <= b.check_out)));
 
-
+            return isAvailable;
+        }
 
 
     }
