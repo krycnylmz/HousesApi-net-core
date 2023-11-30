@@ -88,7 +88,7 @@ namespace HousesApi.Controllers
             else
             {
                 // Kullanıcı giriş yapmamış, hata yanıtı döndür
-                return Unauthorized("Giriş yapmadan rezervasyon yapamazsınız.");
+                return Unauthorized("You can not stay a book as a unauthorized.");
             }
         }
 
