@@ -50,7 +50,7 @@ namespace HousesApi.Controllers
 
             if (bookingDto.check_in >= bookingDto.check_out)
             {
-                return BadRequest("Dates are wrong!");
+                return Conflict("Dates conflicts theirselfs!");
             }
 
             if (User.Identity != null && User.Identity.IsAuthenticated)
@@ -60,7 +60,7 @@ namespace HousesApi.Controllers
 
                 if (!isBookingAvailable)
                 {
-                    return BadRequest("This house is not available.");
+                    return Conflict("This house is not available for that time.");
                 }
 
                 // Rezervasyonu eklemek için devam edin
