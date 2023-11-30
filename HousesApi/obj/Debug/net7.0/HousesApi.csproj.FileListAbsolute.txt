@@ -257,3 +257,4 @@
 /Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/appsettingsExample.Development.json
 /Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/appsettingsExample.json
+/Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.Versioning.dll

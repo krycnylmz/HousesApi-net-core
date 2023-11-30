@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aqzNQbCTnDz8bm4ebhVgkHe/GCstDE59ZD2isz4eB4t+18qCV8jc1qtTF/q8sVKGjR940+zKuqkNkfjRYc01RA==",
+  "dgSpecHash": "jug3uUSoyaui7w3Z1G3dmDqYC3JMw2oc07IafQTSOrvy4u+K7EdrsC8lT+alWSQBrcN1YQKSSsWLRoobpe+udQ==",
   "success": true,
   "projectFilePath": "/Users/koray/Projects/HousesApi/HousesApi/HousesApi.csproj",
   "expectedPackageFiles": [
@@ -59,6 +59,7 @@
     "/Users/koray/.nuget/packages/humanizer.core.zh-hans/2.14.1/humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "/Users/koray/.nuget/packages/humanizer.core.zh-hant/2.14.1/humanizer.core.zh-hant.2.14.1.nupkg.sha512",
     "/Users/koray/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.0/microsoft.aspnetcore.authentication.jwtbearer.7.0.0.nupkg.sha512",
+    "/Users/koray/.nuget/packages/microsoft.aspnetcore.mvc.versioning/5.1.0/microsoft.aspnetcore.mvc.versioning.5.1.0.nupkg.sha512",
     "/Users/koray/.nuget/packages/microsoft.aspnetcore.openapi/7.0.14/microsoft.aspnetcore.openapi.7.0.14.nupkg.sha512",
     "/Users/koray/.nuget/packages/microsoft.aspnetcore.razor.language/6.0.11/microsoft.aspnetcore.razor.language.6.0.11.nupkg.sha512",
     "/Users/koray/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
