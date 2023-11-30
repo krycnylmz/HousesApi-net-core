@@ -4,7 +4,10 @@ namespace HousesApi.Models
 {
 	public class BookingDto
 	{
+            [Required]
             public long house_id { get; set; }
+
+            [Required]
             public long user_id { get; set; }
 
             [Required]
