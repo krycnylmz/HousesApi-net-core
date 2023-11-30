@@ -48,6 +48,11 @@ namespace HousesApi.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (bookingDto.check_in >= bookingDto.check_out)
+            {
+                return BadRequest("Dates are wrong!");
+            }
+
             if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 // Gelen tarih aralığında rezervasyon kontrolü
@@ -55,7 +60,7 @@ namespace HousesApi.Controllers
 
                 if (!isBookingAvailable)
                 {
-                    return BadRequest("Bu ev belirtilen tarihler arasında zaten rezerve edilmiş.");
+                    return BadRequest("This house is not available.");
                 }
 
                 // Rezervasyonu eklemek için devam edin
@@ -86,7 +91,7 @@ namespace HousesApi.Controllers
             // Belirtilen ev ve tarih aralığında rezervasyon yapılıp yapılmadığını kontrol et
             bool isAvailable = !_context.Bookings.Any(b =>
                 b.house_id == houseId &&
-                ((checkIn >= b.check_in && checkIn < b.check_out) || (checkOut > b.check_in && checkOut <= b.check_out)));
+                ((checkIn >= b.check_in && checkIn <= b.check_out) || (checkOut >= b.check_in && checkOut <= b.check_out)));
 
             return isAvailable;
         }
