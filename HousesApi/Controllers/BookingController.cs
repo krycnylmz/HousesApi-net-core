@@ -53,6 +53,12 @@ namespace HousesApi.Controllers
                 return Conflict("Dates conflicts theirselfs!");
             }
 
+            bool isHouseCapacitySuitable = IsHouseCapacitySuitable(bookingDto.house_id, bookingDto.number_of_people);
+            if (!isHouseCapacitySuitable)
+            {
+                return BadRequest("House capacity is not suitable for these many people");
+            }
+
             if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 // Gelen tarih aralığında rezervasyon kontrolü
@@ -96,6 +102,19 @@ namespace HousesApi.Controllers
             return isAvailable;
         }
 
+        private bool IsHouseCapacitySuitable(long houseId, int numberOfPeople)
+        {
+            var house = _context.Houses.FirstOrDefault(h => h.Id == houseId);
+
+            // Check if the house exists
+            if (house != null)
+            {
+                return house.capacity >= numberOfPeople;
+            }
+
+            // Handle the case where the house with the specified Id doesn't exist
+            return false;
+        }
 
     }
 }
