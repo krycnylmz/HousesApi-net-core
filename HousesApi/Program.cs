@@ -6,12 +6,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// We dont need this anymore beccause we are using vault key
+//builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+var keyVaultEndpoint = new Uri(builder.Configuration["VaultKey"]);
+var secretClient = new SecretClient(keyVaultEndpoint, new DefaultAzureCredential());
+
+KeyVaultSecret kvs = secretClient.GetSecret("housesapidemosecret");
+builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(kvs.Value));
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

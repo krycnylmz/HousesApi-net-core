@@ -253,6 +253,6 @@
 /Users/koray/Projects/HousesApi/HousesApi/obj/Debug/net7.0/ref/HousesApi.dll
 /Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/AutoMapper.dll
 /Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-/Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/appsettingsExample.Development.json
-/Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/appsettingsExample.json
 /Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.Versioning.dll
+/Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/appsettings.json
+/Users/koray/Projects/HousesApi/HousesApi/bin/Debug/net7.0/Azure.Security.KeyVault.Secrets.dll
