@@ -31,7 +31,6 @@ namespace HousesApi.Controllers
         /// <param name="userLogin"></param>
         /// <returns></returns>
         [HttpPost]
-        [HttpPost("Login")]
         public IActionResult Login([FromBody] UserLoginDto userLogin)
         {
             var user = Authenticate(userLogin);

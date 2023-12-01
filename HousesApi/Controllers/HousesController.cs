@@ -16,12 +16,35 @@ public class HousesController : ControllerBase
         _dbContext = dbContext;
     }
 
-    // GET: api/Houses
+    // Other using statements...
+
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<House>>> GetHouses()
+    public async Task<ActionResult<IEnumerable<HouseDto>>> GetHouses()
     {
-        return await _dbContext.Houses.ToListAsync();
+        var houses = await _dbContext.Houses.ToListAsync();
+        var houseDtos = new List<HouseDto>();
+
+        foreach (var house in houses)
+        {
+            var houseDto = new HouseDto
+            {
+                house_name = house.house_name,
+                location = house.location,
+                capacity = house.capacity,
+                garden_view = house.garden_view,
+                wifi = house.wifi,
+                lake_view = house.lake_view,
+                pool = house.pool,
+                lake_access = house.lake_access,
+                hot_tub = house.hot_tub,
+            };
+
+            houseDtos.Add(houseDto);
+        }
+
+        return Ok(houseDtos);
     }
+
 
     // GET: api/Houses/5
     [HttpGet("{id}")]
@@ -58,32 +81,32 @@ public class HousesController : ControllerBase
 
 
     // POST: api/Houses
-    [HttpPost]
-    public async Task<ActionResult<House>> PostHouse(HouseDto houseDto)
-    {
-        // HouseDto'yu House sınıfına dönüştürme
-        // Burada AutoMapper gibi bir paket kullanıp hepisni tek seferde yapmak isterdim ancak zamanım yetmedi AutoMapper mekanizmasını çözmeye
-        House house = new House()
-        {
-            // House sınıfının özelliklerine, HouseDto'nun özelliklerini atayalım
-            user_id = houseDto.user_id,
-            house_name = houseDto.house_name,
-            location = houseDto.location,
-            capacity = houseDto.capacity,
-            wifi = houseDto.wifi,
-            lake_view = houseDto.lake_view,
-            pool = houseDto.pool,
-            lake_access = houseDto.lake_access,
-            hot_tub = houseDto.hot_tub,
-            created_at = DateTime.Now
-        };
+    //[HttpPost]
+    //public async Task<ActionResult<House>> PostHouse(HouseDto houseDto)
+    //{
+    //    // HouseDto'yu House sınıfına dönüştürme
+    //    // Burada AutoMapper gibi bir paket kullanıp hepisni tek seferde yapmak isterdim ancak zamanım yetmedi AutoMapper mekanizmasını çözmeye
+    //    House house = new House()
+    //    {
+    //        // House sınıfının özelliklerine, HouseDto'nun özelliklerini atayalım
+    //        user_id = 1,
+    //        house_name = houseDto.house_name,
+    //        location = houseDto.location,
+    //        capacity = houseDto.capacity,
+    //        wifi = houseDto.wifi,
+    //        lake_view = houseDto.lake_view,
+    //        pool = houseDto.pool,
+    //        lake_access = houseDto.lake_access,
+    //        hot_tub = houseDto.hot_tub,
+    //        created_at = DateTime.Now
+    //    };
 
-        _dbContext.Houses.Add(house);
+    //    _dbContext.Houses.Add(house);
 
-        await _dbContext.SaveChangesAsync();
+    //    await _dbContext.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetHouse), new { id = house.Id }, house);
-    }
+    //    return CreatedAtAction(nameof(GetHouse), new { id = house.Id }, house);
+    //}
 
 
 }

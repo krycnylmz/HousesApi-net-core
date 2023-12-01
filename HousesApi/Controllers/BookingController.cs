@@ -16,27 +16,27 @@ namespace HousesApi.Controllers
             _context = context;
         }
 
-        // GET: api/Booking
-        [HttpGet]
-        public async Task<IActionResult> GetBookings()
-        {
-            var bookings = await _context.Bookings.ToListAsync();
-            return Ok(bookings);
-        }
+        //// GET: api/Booking
+        //[HttpGet]
+        //public async Task<IActionResult> GetBookings()
+        //{
+        //    var bookings = await _context.Bookings.ToListAsync();
+        //    return Ok(bookings);
+        //}
 
         // GET: api/Booking/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBooking(long id)
-        {
-            var booking = await _context.Bookings.FindAsync(id);
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetBooking(long id)
+        //{
+        //    var booking = await _context.Bookings.FindAsync(id);
 
-            if (booking == null)
-            {
-                return NotFound();
-            }
+        //    if (booking == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(booking);
-        }
+        //    return Ok(booking);
+        //}
 
         // POST: api/Booking
         [Authorize]

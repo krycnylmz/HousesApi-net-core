@@ -5,7 +5,6 @@ namespace HousesApi.Models
 {
     public class HouseDto
     {
-        public long user_id { get; set; }
         [Required]
         public string house_name { get; set; }
         public string location { get; set; }
