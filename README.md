@@ -17,7 +17,7 @@ You need to have a token to booking, you can use this informations to get that t
 - Swagger UI is integrated for API documentation.
 - .NET Core Web Api
 - Azure Sql Database
-- Azure Cloud Servis 
+- Azure Cloud Service
 ## _Check List For COMMON REQUIREMENTS_
 - [x] Every student will do their own midterm, no groups
 - [] All REST services must be versionable
@@ -28,6 +28,7 @@ You need to have a token to booking, you can use this informations to get that t
 - [x] use a database service from any cloud service you like -> Azure Sql Database
 (preferably Azure + 10 points).
 - [x] Use a cloud service (+10 points) -> Azure Web App Cloud
+- [x] Presentation Video (+5 points)
 
 
 ## _Development_
@@ -35,3 +36,4 @@ I share appsettings file on github because azure services need my own ip and acc
 
 
 ## _Presentation Video_
+https://youtu.be/iOeAweqeRjY
