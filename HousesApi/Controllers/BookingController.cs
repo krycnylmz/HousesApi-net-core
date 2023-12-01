@@ -83,7 +83,8 @@ namespace HousesApi.Controllers
                 _context.Bookings.Add(booking);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetBooking", new { id = booking.Id }, booking);
+                //return CreatedAtAction("GetBooking", new { id = booking.Id }, booking);
+                return Ok("Booking successful");
             }
             else
             {
